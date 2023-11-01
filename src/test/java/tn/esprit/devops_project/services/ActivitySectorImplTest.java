@@ -40,49 +40,33 @@ private ActivitySectorImpl service;
     @Test
     void addActivitySector() {
         ActivitySector activitySector = new ActivitySector();
-        activitySector.setCodeSecteurActivite("test");
+        activitySector.setCodeSecteurActivite("Welcom");
         activitySector.setLibelleSecteurActivite("new libelle");
         ActivitySector activitySector1 = service.addActivitySector(activitySector);
         assertNotNull(activitySector1);
         assertNotNull(activitySector1.getIdSecteurActivite());
-        assertEquals("test" , activitySector1.getCodeSecteurActivite());
+        assertEquals("Welcom" , activitySector1.getCodeSecteurActivite());
         assertEquals("new libelle",activitySector1.getLibelleSecteurActivite());
 
     }
-   /* @Test
-    void addActivitySector2() {
-        ActivitySector newActivitySector = new ActivitySector();
-        newActivitySector.setCodeSecteurActivite("XX");
-        newActivitySector.setLibelleSecteurActivite("Sector1");
-        when(activitySectorRepository.save(newActivitySector)).thenReturn(newActivitySector);
-        ActivitySector savedActivitySector = activitySectorService.addActivitySector(newActivitySector);
-        assertNotNull(savedActivitySector);
 
-
-    }*/
     @Test
     void deleteActivitySector() {
-        // Créez un secteur d'activité que vous souhaitez supprimer (ou utilisez un existant)
 
-        // Appelez la méthode de service pour supprimer le secteur d'activité
         activitySectorService.deleteActivitySector(1L);
 
-        // Effectuez des assertions pour vérifier que le secteur d'activité a été supprimé correctement
     }
 
 
     @Test
     void updateActivitySector() {
-        // Créez un secteur d'activité existant que vous souhaitez mettre à jour
         ActivitySector existingSector = new ActivitySector();
-        existingSector.setIdSecteurActivite(1L); // Remplacez par l'ID du secteur existant
-        existingSector.setCodeSecteurActivite("SAE");
-        existingSector.setLibelleSecteurActivite("Genielogiciel");
+        existingSector.setIdSecteurActivite(1L);
+        existingSector.setCodeSecteurActivite("Hello");
+        existingSector.setLibelleSecteurActivite("School");
 
-        // Appelez la méthode de service pour mettre à jour le secteur d'activité
         ActivitySector updatedSector = activitySectorService.updateActivitySector(existingSector);
 
-        // Effectuez des assertions pour vérifier que le secteur d'activité a été mis à jour correctement
 
     }
 
