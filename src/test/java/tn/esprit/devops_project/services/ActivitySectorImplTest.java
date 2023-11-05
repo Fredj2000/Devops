@@ -52,8 +52,13 @@ private ActivitySectorImpl service;
 
     @Test
     void deleteActivitySector() {
+        ActivitySector activitySector = new ActivitySector();
+        activitySector.setIdSecteurActivite(2L);
+        activitySector.setCodeSecteurActivite("Welcom");
+        activitySector.setLibelleSecteurActivite("new libelle");
+        activitySectorService.addActivitySector(activitySector);
 
-        activitySectorService.deleteActivitySector(1L);
+        activitySectorService.deleteActivitySector(2L);
 
     }
 
