@@ -69,8 +69,7 @@ private ActivitySectorImpl service;
         existingSector.setIdSecteurActivite(1L);
         existingSector.setCodeSecteurActivite("Hello");
         existingSector.setLibelleSecteurActivite("School");
-
-        ActivitySector updatedSector = activitySectorService.updateActivitySector(existingSector);
+        activitySectorService.updateActivitySector(existingSector);
 
 
     }
