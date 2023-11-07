@@ -15,7 +15,7 @@ services:
   app-timesheet:
     depends_on:
       - postgresdb
-    image: ahmedfredj/timesheet-devops:1.0.0
+    image: ahmedfredj/devops-back:latest
     restart: on-failure
     ports:
       - "8999:8999"
