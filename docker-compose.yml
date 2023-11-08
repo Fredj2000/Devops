@@ -1,34 +1,32 @@
-version: '3'
+version: "3.8"
 services:
-  devops-back:
-    image: devops-back
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8999:8999"
-    depends_on:
-      - postgres
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/devops
-      - SPRING_PROFILES_ACTIVE=prod
-
   postgres:
     image: postgres:latest
-    networks:
-      - mynetwork
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: devops
+      -POSTGRES_USER: postgres
+      -POSTGRES_PASSWORD: root
+      -POSTGRES_DB: devops
     ports:
-      - "5434:5432"
+       - 5434:5432
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-networks:
-  mynetwork:
-    driver: bridge
-
+       - postgres-data:/var/lib/postgresql/data
+  app-devops-back:
+    depends_on:
+      - postgres
+    image: ahmedfredj/devops-back
+    restart: on-failure
+    ports:
+      - 8999:8999
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.ur" : "jdbc:postgresql://postgres:5432/devops",
+        "spring.datasource.username" : "postgres",
+        "spring.datasource.password" : "root",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQL81Dialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    stdin_open: true
+    tty: true
 volumes:
-  postgres-data:
+  db :
